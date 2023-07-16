@@ -11,7 +11,7 @@ function traerDatos() {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data.name);
-                document.getElementById("categoriasNombre").innerHTML = `Pokemon tipo ${data.name}`;
+                document.getElementById("categoriasNombre").innerHTML = `CATEGORIA  ${data.name}`;
                 console.log(data)
                 data.pokemon.forEach(element => {
                     pokemon.push(element);
@@ -30,7 +30,7 @@ function mostrarPokemon() {
     traerDatos().then(response => {
       pokemon.forEach(element => {
         listaPokemon += `
-          <div class="card border border-secondary border-1 rounded-5 mb-3 mx-5" style="max-width: 540px; background-image: url('https://images4.alphacoders.com/574/574726.jpg'); background-repeat: no-repeat; background-size: cover;" draggable="true" ondragstart="drag(event)" id="card${element.pokemon.name}">
+          <div class="card border border-secondary border-1 rounded-5 mb-3 mx-5" style="max-width: 540px; background-image: url('https://images4.alphacoders.com/574/574726.jpg'); background-repeat: no-repeat;  background-position: center; background-size: cover;" draggable="true" ondragstart="drag(event)" id="card${element.pokemon.name}">
             <div class="row g-0">
               <div class="col-md-4">
                 <a onclick="localUrlPokemones('${element.pokemon.url}')" href="pokemonDetalle.php">
@@ -61,10 +61,12 @@ function mostrarPokemon() {
 mostrarPokemon();
 
 function detallePokemon(pokemon) {
+    console.log(pokemon);
     fetch(pokemon.pokemon.url)
+  
         .then(response => response.json())
         .then(data => {
-
+        
 
             let imagen = data.sprites.other["official-artwork"].front_default
             let altura = (data.height * 0.1).toFixed(1)

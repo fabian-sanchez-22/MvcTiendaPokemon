@@ -17,6 +17,8 @@
     <script src="./assets/js/scriptTypes.js"></script>
     <script src="./assets/js/scriptPokeDetalle.js"></script>
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/axios.min.js"></script>
+    <script src="./assets/js/login.validate.js"></script>
 
     <title>Pokemon store</title>
 </head>
@@ -47,8 +49,8 @@
                     </span>
                 </button>
 
-                <button type="button" class="btn btn-warning">Iniciar sesión</button>
-                <button type="button" class="btn btn-warning"><i class="fa-solid fa-right-from-bracket"></i></button>
+                <button  type="button" class="btn btn-warning"  onclick="window.location.href = 'login.php';">Iniciar sesión</button>
+                <button  onclick="deleteLogin()" type="button" class="btn btn-warning"><i class="fa-solid fa-right-from-bracket"></i></button>
 
 </div>
 
@@ -63,7 +65,7 @@
                     <div class="offcanvas-footer text-center">
                         <span id="totalPagar">Total: </span>
                         <hr>
-                        <a href="factura.php" class="btn btn-sm btn-warning mb-1">Finalizar compra</a>
+                        <a href="pedido.frm.php" class="btn btn-sm btn-warning mb-1">Finalizar compra</a>
                     </div>
                 </div>
             </div>

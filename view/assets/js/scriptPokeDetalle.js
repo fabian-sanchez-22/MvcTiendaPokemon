@@ -58,7 +58,7 @@ function traerPokemones() {
                 document.getElementById("imagenPokemon").src = imagen
                 document.getElementById("gif").src = gif
                 document.getElementById("gifDos").src = gifDos
-                document.getElementById("id").innerText = `Id: ${id}`
+                document.getElementById("id").innerText = `ID: ${id}`
                 document.getElementById("peso").innerText = `Peso: ${peso} Kg`
                 document.getElementById("altura").innerText = `Altura: ${altura} m`
                 document.getElementById("orden").innerText = `Orden: ${numero}`

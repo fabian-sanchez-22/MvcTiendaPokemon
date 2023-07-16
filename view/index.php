@@ -12,23 +12,23 @@
                 <div class="carousel-item active" data-bs-interval="10000" style="background-image:url(./assets/img/6224238.jpg)   ;  background-size: cover; background-position: center;  ">
                     <img id="pokemonUno" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/319.png" class="" alt="..." style="width: 40%;">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5 class="text-warning">First slide label</h5>
-                        <p class="text-warning">Some representative placeholder content for the first slide.</p>
+                        <h5 class="text-light">First slide label</h5>
+                        <p class="text-light">Some representative placeholder content for the first slide.</p>
                     </div>
                 </div>
                 <div class="carousel-item" data-bs-interval="2000 " style="background-image:url(https://wallpaperaccess.com/full/432108.jpg)   ;  background-repeat: no-repeat; background-size: cover; background-position: center;  ">
                     <img id="pokemonDos" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/052.png" class="" alt="..." style="width: 40%;">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5 class="text-warning">Second slide label</h5>
-                        <p class="text-warning">Some representative placeholder content for the second slide.
+                        <h5 class="text-light">Second slide label</h5>
+                        <p class="text-light">Some representative placeholder content for the second slide.
                         </p>
                     </div>
                 </div>
                 <div class="carousel-item" style="background-image:url(https://fondosmil.com/fondo/21784.jpg)   ;  background-repeat: no-repeat; background-size: cover; background-position: center;  ">
                     <img id="pokemonTres" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png" class="" alt="..." style="width: 40%;">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5 class="text-warning">Third slide label</h5>
-                        <p class="text-warning">Some representative placeholder content for the third slide.</p>
+                        <h5 class="text-light">Third slide label</h5>
+                        <p class="text-light">Some representative placeholder content for the third slide.</p>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
 
     </div>
     <div class="col-4 row">
-        <img class="img-fluid" src="https://o.remove.bg/downloads/417f2b73-5c6f-47ab-9606-a25f15a34177/png-transparent-ash-ketchum-pikachu-misty-pokemon-poke-ball-pikachu-manga-cartoon-fictional-character-removebg-preview.png" style="height: 350px;" alt="">
+        <img class="img-fluid" src="./assets/img/png-transparent-ash-ketchum-pikachu-misty-pokemon-poke-ball-pikachu-manga-cartoon-fictional-character-removebg-preview.png" style="height: 350px;" alt="">
 
     </div>
 </section>
