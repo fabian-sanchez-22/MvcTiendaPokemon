@@ -67,6 +67,16 @@ class Usuario
     }
 
 
+    public function readInventario(){
+        try {
+            $sql = $this->conexion->getConPDO()->prepare("SELECT * FROM pokemons");
+            $sql->execute();
+            $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        } catch (\PDOException $e) {
+            return "Error" . $e->getMessage();
+        }
+    }
 
 
   

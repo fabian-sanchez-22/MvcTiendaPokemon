@@ -27,6 +27,11 @@
             <input onclick="login()" class="btn btn-primary" type="button" value="Iniciar">
 
         </div>
+
+        <div>
+            <a style="margin-left: 600px;" href="usuarios.frm.php">Crear una cuenta</a>
+        </div>
+
 </body>
 
 </html>

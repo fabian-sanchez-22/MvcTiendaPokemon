@@ -140,6 +140,8 @@
             <a onclick="create()" class="btn btn-primary">Crear</a>
         </div>
     </div>
+
+    <a href="login.php ">Ir a iniciar sesion</a>
 </body>
 </html>
 

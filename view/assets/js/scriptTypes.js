@@ -42,7 +42,7 @@ function mostrarPokemon() {
               </div>
               <div class="col-md-8">
                 <div class="card-body text-center">
-                  <h5 style="font-family: 'Pokemon Solid'" class="card-title text-center text-warning sombra selector">${element.pokemon.name}</h5> 
+                  <h5 style="font-family: 'Pokemon Solid'" class="card-title text-center ">${element.pokemon.name}</h5> 
                   <p id="peso${element.pokemon.name}" class="card-text fw-bold"></p>
                   <div class="d-flex align-items-center col-12 justify-content-around">
                     <button onclick="backInfoPokemon('${element.pokemon.name}')" type="button" class="btn btn-primary text-warning fw-bold">Comprar</button>

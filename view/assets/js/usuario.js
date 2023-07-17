@@ -6,11 +6,29 @@ function create(){
 axios.post('../controller/usuario.create.php', data)
 .then(function(response){
 console.log(response);
+alert("Ususario creado");
+clear();
 })
 .catch(function(error){
 console.log(error);
 });
 }
+
+
+
+function clear() {
+    selTipoDoc.value = "";
+    txtIdentificacion.value = "";
+    txtNombre.value = "";
+    txtApellido.value = "";
+    txtCorreo.value = "";
+    txtContrasena.value = "";
+    txtDireccion.value = "";
+    txtTelefono.value = "";
+    selGenero.value = "";
+    selRol.value = "";
+}
+
 
 
 function selectRol(){
@@ -28,6 +46,24 @@ function selectRol(){
     console.log(error);
     })
     }
+
+    function readInventario (){
+        axios.get("../controller/readInventario.php")
+        .then(function(response){
+            let tabla = "";
+        response.data.forEach((element) => {
+        tabla += `<tr>`;
+        tabla += `<td>${element.id}</td>`;
+        tabla += `<td>${element.name}</td>`;
+        tabla += `<td>${element.life}</td>`;
+        tabla += `<tr>`;
+        })
+        tableInventario.innerHTML = tabla;
+        })
+        .catch(function(error){
+        console.log(error);
+        })
+        }
 
 
     

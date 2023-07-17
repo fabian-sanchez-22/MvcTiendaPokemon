@@ -13,9 +13,6 @@ try {
     alert("Error al iniciar sesion");
 }
 
-
-
-
 })
 .catch(function(error){
 console.log(error);

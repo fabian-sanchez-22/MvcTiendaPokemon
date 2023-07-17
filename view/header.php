@@ -48,8 +48,6 @@
                         <span class="visually-hidden">unread messages</span>
                     </span>
                 </button>
-
-                <button  type="button" class="btn btn-warning"  onclick="window.location.href = 'login.php';">Iniciar sesión</button>
                 <button  onclick="deleteLogin()" type="button" class="btn btn-warning"><i class="fa-solid fa-right-from-bracket"></i></button>
 
 </div>
