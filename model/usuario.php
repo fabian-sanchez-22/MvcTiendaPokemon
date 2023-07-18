@@ -3,8 +3,14 @@ namespace modelo;
 
 include_once "conexion.php";
 
+
+
 class Usuario
 {
+
+
+
+
     private $id;
     private $tipoDoc;
     private $identificacion;
@@ -23,6 +29,10 @@ class Usuario
     {
         $this->conexion = new \Conexion;
     }
+
+
+
+
 
     public function create()
     {
@@ -65,6 +75,9 @@ class Usuario
             return "Error: " + $err->getMessage();
         }
     }
+
+
+    
 
 
     public function readInventario(){
@@ -279,4 +292,5 @@ class Usuario
 
         return $this;
     }
+
 }

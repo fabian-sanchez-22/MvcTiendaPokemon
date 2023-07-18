@@ -54,11 +54,39 @@
     // mostrarProductosDelCarrito();
     
 
+    function createProduct() {
+        const total = document.getElementById('totalId').textContent;
+        const codigoPedido = generarCodigoPedido(3);
+
+        let data = `codigoPed=${codigoPedido}&fechaPed=${txtFecha.value}&nombre=${txtNombre.value}&direccion=${txtDireccion.value}&telefono=${txtTelefono.value}&formaPago=${selFormaPago.value}&fechaEnvPedido=${txtFechaEnvio.value}&total=${total}`
+
+        axios.post('../controller/pedido.create.php', data)
+        .then(function(response){
+        console.log(response);
+        console.log(data);
+        alert("Pedido tomado ");
+    })
+        .catch(function(error){
+        console.log(error);
+});
+    }
+
+
+
+    function generarCodigoPedido(longitud) {
+        let codigo = '';
+        for (let i = 0; i < longitud; i++) {
+          codigo += Math.floor(Math.random() * 10); // Generar un dígito aleatorio del 0 al 9
+        }
+    
+        return codigo;
+    }
+
+
+
 const carrito = JSON.parse(localStorage.getItem('datosPokemon')) || [];
 
-
 mostrarProductosDelCarrito();
-
 
 function mostrarProductosDelCarrito() {
   const tableBodyUsuario = document.getElementById('tableBodyUsuario');
@@ -85,13 +113,13 @@ function mostrarProductosDelCarrito() {
     cantidadInput.addEventListener('input', function () {
       const newCantidad = parseInt(this.value);
       producto._cantidad = newCantidad;
-      precioTd.textContent = (_precio * newCantidad).toFixed(2);
+      precioTd.textContent = (_precio * newCantidad)
       actualizarTotal();
     });
     cantidadTd.appendChild(cantidadInput);
 
     const precioTd = document.createElement('td');
-    precioTd.textContent = (_precio * _cantidad).toFixed(2);
+    precioTd.textContent = (_precio * _cantidad)
 
     tr.appendChild(nombreTd);
     tr.appendChild(cantidadTd);
@@ -104,12 +132,12 @@ function mostrarProductosDelCarrito() {
 
   const totalTd = document.createElement('td');
   totalTd.colSpan = 3;
-  totalTd.textContent = 'Total: ' + total.toFixed(2);
+  totalTd.textContent = total
+  totalTd.id = 'totalId'; // Asignar un ID al elemento del total
 
   totalRow.appendChild(totalTd);
   tableBodyUsuario.appendChild(totalRow);
 
-  // Función para actualizar el total
   function actualizarTotal() {
     total = 0;
 
@@ -117,7 +145,7 @@ function mostrarProductosDelCarrito() {
       total += producto._precio * producto._cantidad;
     });
 
-    totalTd.textContent = 'Total: ' + total.toFixed(2);
+    totalTd.textContent = total
   }
 }
 

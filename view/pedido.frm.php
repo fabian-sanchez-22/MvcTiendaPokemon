@@ -3,47 +3,6 @@ include_once "header.php";
 ?>
 
 
-<!-- <div class="row my-5">
-    <h1 class="text-center  ">FORMULARIO DE PEDIDOS</h1>
-</div>
-
-
-<div class="col-2">
-        <span class="fw-bolder">Nombre:</spam>
-    </div>
-
-    <div class="col-4">
-    <div class="form-floating">
-        <input type="text" name="dnmNombre" id="dnmNombre" class="form-control" placeholder=".">
-        <label for="floatingInput">Nombre</label>
-    </div>
-</div>
-
-
-
-<div class="col-2">
-        <span class="fw-bolder">Cantidad:</spam>
-    </div>
-
-    <div class="col-4">
-    <div class="form-floating">
-        <input type="text" name="dnmCantidad" id="dnmCantidad" class="form-control" placeholder=".">
-        <label for="floatingInput">Cantidad</label>
-    </div>
-</div>
-
-<div class="col-2">
-        <span class="fw-bolder">Precio:</spam>
-    </div>
-
-    <div class="col-4">
-    <div class="form-floating">
-        <input type="text" name="dnmPrecio" id="dnmPrecio" class="form-control" placeholder=".">
-        <label for="floatingInput">Precio</label>
-    </div>
-</div> -->
-
-
 <div class="row mt-5 d-flex justify-content-center">
     <h1 class="bg-dark py-1 text-center text-white">Resumen de compra</h1>
     <div class="col-10">
@@ -61,6 +20,7 @@ include_once "header.php";
 </div>
 
 
+<h1 class="bg-dark py-1 text-center text-white">Datos de envío</h1>
 
 
 <div class="row">
@@ -130,9 +90,9 @@ include_once "header.php";
         <div class="form-floating">
             <select name="selFormaPago" id="selFormaPago" class="form-control">
                 <option value="0" selected disabled>Seleccionar</option>
-                <option value="EF">Efectivo</option>
-                <option value="TC">Tarjeta</option>
-                <option value="NE">Nequi</option>
+                <option value="Transferencia">Transferencia</option>
+                <option value="Contraentrega">Contraentrega</option>
+                <option value="Consignacion">Consignacion</option>
             </select>
             <label for="floatingInput">Forma de pago</label>
         </div>
@@ -140,14 +100,6 @@ include_once "header.php";
 </div>
 
 <div class="row mt-3">
-    <div class="col-2">
-        <span class="fw-bolder">Total del Pedido</spam>
-    </div>
-    <div class="col-4">
-        <div class="form-floating">
-            <input type="text" name="txtTotalPedido" id="txtTotalPedido" class="form-control" placeholder="." readonly>
-        </div>
-    </div>
 
     <div class="col-2">
         <span class="fw-bolder">Estado del pedido:</spam>
@@ -159,4 +111,11 @@ include_once "header.php";
     </div>
 </div>
 
+<div class="row mt-5 justify-content-center">
+    <div class="col-4 d-grid gap-2">
+        <a onclick="createProduct()" class="btn btn-primary">Realizar Pedido</a>
+    </div>
+</div>
+
 <script src="./assets/js/formCompra.js"></script>
+<script src="./assets/js/axios.min.js"></script>

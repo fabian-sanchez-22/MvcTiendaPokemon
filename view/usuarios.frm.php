@@ -141,7 +141,7 @@
         </div>
     </div>
 
-    <a href="login.php ">Ir a iniciar sesion</a>
+    <a style="margin-left: 600px;" href="login.php">Ir a iniciar sesion</a>
 </body>
 </html>
 
