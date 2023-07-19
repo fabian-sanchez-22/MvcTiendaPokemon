@@ -56,6 +56,9 @@ function selectRol(){
         tabla += `<td>${element.id}</td>`;
         tabla += `<td>${element.name}</td>`;
         tabla += `<td>${element.life}</td>`;
+        tabla += `<td>
+        <a onclick="readStock(${element.id}, ${element.life})" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModals">Modificar</a>
+                </td>`;
         tabla += `<tr>`;
         })
         tableInventario.innerHTML = tabla;
@@ -65,6 +68,37 @@ function selectRol(){
         })
         }
 
+
+var currentElementId; 
+
+function readStock(id, cantidad) {
+axios.get(`../controller/stock.update.php?id=${id}`)
+    .then(function (response) {
+    console.log(response.data);
+
+    const cantidadInput = document.getElementById('cantidadMod');
+    cantidadInput.value = cantidad; 
+
+    currentElementId = id; 
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+}
+
+
+function actualizarCantidad(){
+let data = `id=${currentElementId}&cantidad=${cantidadMod.value}`
+axios.post("../controller/stock.update.php", data)
+.then(function(response){
+    console.log(data);
+console.log(response);
+readInventario()
+})
+.catch(function(error){
+console.log(error);
+})
+}
 
     
 
