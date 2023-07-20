@@ -9,6 +9,7 @@ $telefono = $_POST["telefono"];
 $formaPago = $_POST["formaPago"];
 $fechaEnvPedido = $_POST["fechaEnvPedido"];
 $total = $_POST["total"];
+$idUsu = $_POST["idUsu"];
 
 $pedidoM = new \modelo\Pedido;
 
@@ -20,6 +21,7 @@ $pedidoM->settelefono($telefono);
 $pedidoM->setformaPago($formaPago);
 $pedidoM->setfechaEnvPedido($fechaEnvPedido);
 $pedidoM->settotal($total);
+$pedidoM->setIdUsu($idUsu);
 
 
 $response = $pedidoM->createProduct();

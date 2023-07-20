@@ -15,7 +15,10 @@ class Pedido
     private $formaPago;
     private $fechaEnvPedido;
     private $total;
+    private $idUsu;
+    
     private $conexion;
+
 
     public function __construct()
     {
@@ -25,7 +28,7 @@ class Pedido
     public function createProduct()
     {
         try {
-            $sql = $this->conexion->getConPDO()->prepare("INSERT INTO pedidos(codigoPed, fechaPed, nombre, direccion, telefono, formaPago, totalPed, fechaEnvPedido) VALUES (?,?,?,?,?,?,?,?)");
+            $sql = $this->conexion->getConPDO()->prepare("INSERT INTO pedidos(codigoPed, fechaPed, nombre, direccion, telefono, formaPago, totalPed, fechaEnvPedido, idUsu) VALUES (?,?,?,?,?,?,?,?,?)");
             $sql->bindParam(1, $this->codigoPed);
             $sql->bindParam(2, $this->fechaPed);
             $sql->bindParam(3, $this->nombre);
@@ -34,6 +37,7 @@ class Pedido
             $sql->bindParam(6, $this->formaPago);
             $sql->bindParam(7, $this->total);
             $sql->bindParam(8, $this->fechaEnvPedido);
+            $sql->bindParam(9, $this->idUsu);
             $sql->execute();
             return "Producto Creado";
         } catch (\PDOException $e) {
@@ -167,6 +171,24 @@ class Pedido
     public function setFormaPago($formaPago): self
     {
         $this->formaPago = $formaPago;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idUsu
+     */
+    public function getIdUsu()
+    {
+        return $this->idUsu;
+    }
+
+    /**
+     * Set the value of idUsu
+     */
+    public function setIdUsu($idUsu): self
+    {
+        $this->idUsu = $idUsu;
 
         return $this;
     }

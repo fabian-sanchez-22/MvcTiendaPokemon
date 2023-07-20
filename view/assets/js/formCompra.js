@@ -58,7 +58,7 @@
         const total = document.getElementById('totalId').textContent;
         const codigoPedido = generarCodigoPedido(3);
 
-        let data = `codigoPed=${codigoPedido}&fechaPed=${txtFecha.value}&nombre=${txtNombre.value}&direccion=${txtDireccion.value}&telefono=${txtTelefono.value}&formaPago=${selFormaPago.value}&fechaEnvPedido=${txtFechaEnvio.value}&total=${total}`
+        let data = `codigoPed=${codigoPedido}&fechaPed=${txtFecha.value}&nombre=${txtNombre.value}&direccion=${txtDireccion.value}&telefono=${txtTelefono.value}&formaPago=${selFormaPago.value}&fechaEnvPedido=${txtFechaEnvio.value}&total=${total}&idUsu=${txtUser.value}`
 
         axios.post('../controller/pedido.create.php', data)
         .then(function(response){

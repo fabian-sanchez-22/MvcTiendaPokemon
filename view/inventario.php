@@ -15,7 +15,7 @@
 
 <body onload="readInventario()">
 
-    <h1 style="text-align: center;">Inventario</h1>
+    <h1 style="text-align: center;">Modificar Stock de Pokemons</h1>
     <br>
 
     <div class="row">
@@ -50,7 +50,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" onclick="actualizarCantidad()">Guardar Cambios</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="actualizarCantidad()">Guardar Cambios</button>
       </div>
     </div>
   </div>

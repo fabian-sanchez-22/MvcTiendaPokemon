@@ -1,7 +1,16 @@
 <?php 
+
+session_start();
+$idUsuario = isset($_SESSION["idUsuario"]) ? $_SESSION["idUsuario"] : "";
 include_once "header.php";
 ?>
 
+<style>
+    #totalId {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    </style>
 
 <div class="row mt-5 d-flex justify-content-center">
     <h1 class="bg-dark py-1 text-center text-white">Resumen de compra</h1>
@@ -19,7 +28,7 @@ include_once "header.php";
     </div>
 </div>
 
-
+<h4 style=" left: 40px; top: 380px; position: absolute;" >Total:</h4>
 <h1 class="bg-dark py-1 text-center text-white">Datos de envío</h1>
 
 
@@ -109,6 +118,16 @@ include_once "header.php";
             <input type="text" name="txtEstadoPedido" id="txtEstadoPedido" class="form-control" placeholder="." readonly>
         </div>
     </div>
+
+    <div class="col-2">
+        <span class="fw-bolder">Usuario:</spam>
+    </div>
+    <div class="col-4">
+        <div class="form-floating">
+            <input type="text" name="txtUser" id="txtUser" class="form-control" placeholder="." readonly value="<?php echo $idUsuario; ?>">
+        </div>
+    </div>
+
 </div>
 
 <div class="row mt-5 justify-content-center">
@@ -116,6 +135,8 @@ include_once "header.php";
         <a onclick="createProduct()" class="btn btn-primary">Realizar Pedido</a>
     </div>
 </div>
+
+<style></style>
 
 <script src="./assets/js/formCompra.js"></script>
 <script src="./assets/js/axios.min.js"></script>

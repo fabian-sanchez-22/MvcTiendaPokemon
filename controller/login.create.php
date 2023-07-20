@@ -17,8 +17,12 @@ if(isset($response) AND !empty($response)){
     session_start();
 $_SESSION["nombre"] = $response[0]["nombre"];
 $_SESSION["correo"] = $response[0]["correo"];
-}
+$_SESSION["idUsuario"] = $response[0]["id"];
 
 echo json_encode($response);
+}  else {
+    echo json_encode(array());
+}
+
 unset($response);
 unset($usuarioM);
