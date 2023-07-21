@@ -23,14 +23,15 @@ class Usuario
     private $genero;
     private $rol;
     private $estado = 'A';
+
+    private $idUsu;
+    
     private $conexion;
 
     public function __construct()
     {
         $this->conexion = new \Conexion;
     }
-
-
 
 
 
@@ -91,7 +92,20 @@ class Usuario
         }
     }
 
-    
+
+    // public function readUsuario()
+    // {
+    //     try {
+    //         $sql = $this->conexion->getConPDO()->prepare("SELECT nombre, apellido FROM tablaUsuarios WHERE id=?");
+    //         $sql->bindParam(1, $this->id);
+    //         $sql->execute();
+    //         $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+    //         return $result;
+    //     } catch (\PDOException $e) {
+    //         return "Error" . $e->getMessage();
+    //     }
+    // }
+
 
 
   
@@ -295,4 +309,22 @@ class Usuario
         return $this;
     }
 
+
+    /**
+     * Get the value of idUsu
+     */
+    public function getIdUsu()
+    {
+        return $this->idUsu;
+    }
+
+    /**
+     * Set the value of idUsu
+     */
+    public function setIdUsu($idUsu): self
+    {
+        $this->idUsu = $idUsu;
+
+        return $this;
+    }
 }

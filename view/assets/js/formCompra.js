@@ -95,11 +95,12 @@ function mostrarProductosDelCarrito() {
   let total = 0;
 
   carrito.forEach((producto) => {
-    const { _nombre, _precio, _cantidad } = producto;
+    const {_nombre, _precio, _cantidad, _id } = producto;
 
     console.log('Nombre:', _nombre);
     console.log('Precio:', _precio);
     console.log('Cantidad:', _cantidad);
+    console.log('Id:', _id)
 
     const tr = document.createElement('tr');
 
@@ -149,3 +150,17 @@ function mostrarProductosDelCarrito() {
   }
 }
 
+function readUser (){
+  axios.get("../controller/read.user.php")
+  .then(function(response){
+  console.log(response);
+  let usuario = "";
+  response.data.forEach((element) => {
+  usuario += `<p>${element.nombre} ${element.apellido}</p>`
+})
+  nombreUsuario.innerHTML = usuario;
+  })
+  .catch(function(error){
+  console.log(error);
+  })
+  };

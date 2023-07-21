@@ -43,7 +43,24 @@ class Pedido
         } catch (\PDOException $e) {
             return "Error  " . $e->getMessage();
         }
+
+        
+
     }
+
+    public function readUsuario()
+    {
+        try {
+            $sql = $this->conexion->getConPDO()->prepare("SELECT nombre, apellido FROM usuarios WHERE id=?");
+            $sql->bindParam(1, $this->idUsu);
+            $sql->execute();
+            $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
+        } catch (\PDOException $e) {
+            return "Error: " . $e->getMessage();
+        }
+    }
+    
 
     /**
      * Get the value of codigoPed

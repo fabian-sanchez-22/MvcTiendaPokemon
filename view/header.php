@@ -23,7 +23,7 @@
     <title>Pokemon store</title>
 </head>
 
-<body class="container-fluid bg-white p-2 text-dark bg-opacity-10" ; onload="slideCatPokemon(), loadAllPokemon(), traerCompra(), totalCompra(), mostrarCategorias(), mostrarPokemon()">
+<body class="container-fluid bg-white p-2 text-dark bg-opacity-10" ; onload="slideCatPokemon(), loadAllPokemon(), traerCompra(), totalCompra(), mostrarCategorias(), mostrarPokemon(), readUser()">
     <div class="container-fluid bg">
         <div class="d-flex align-contents-center justify-content-around" style="margin-top: 17px;">
             <div class="row col-3">
@@ -33,6 +33,15 @@
             <div class="col-1 d-flex align-items-center justify-content-end">
                 <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #FFFF00;"></i>
             </div>
+
+
+
+            <div class="col-1 ">
+                <p id="nombreUsuario"></p>
+            </div>
+
+
+
             <div class="col-4 flex-column my-2 me-5">
 
                 <input type="text" class="form-control" style="border-radius: 13px;" name="txtBuscar" id="txtBuscar" onkeyup="autoCompletePokemon()">

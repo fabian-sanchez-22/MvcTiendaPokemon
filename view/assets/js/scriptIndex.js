@@ -213,10 +213,10 @@ function backInfoPokemon(name) {
     fetch("https://pokeapi.co/api/v2/pokemon/" + name)
         .then(response => response.json())
         .then(data => {
-            // console.log(data);
-            let cantidad = document.getElementById("cantpikachu").value
+            console.log(data.id);
+            let cantidad = document.getElementById(`cant${name}`).value
             if (cantidad >= 1) {
-                let pokemon = new Pokemon(data.name, cantidad, data.base_experience * 100, data.sprites.other["official-artwork"].front_default)
+                let pokemon = new Pokemon(data.name, cantidad, data.base_experience * 100, data.sprites.other["official-artwork"].front_default, data.id)
                 carritoCompras.push(pokemon)
                 localStorage.datosPokemon = JSON.stringify(carritoCompras)
                 carritoPokemon()
@@ -261,10 +261,10 @@ function backInfoPokemon(name) {
     fetch("https://pokeapi.co/api/v2/pokemon/" + name)
         .then(response => response.json())
         .then(data => {
-            // console.log(data);
+            console.log(data.id);
             let cantidad = document.getElementById(`cant${name}`).value
             if (cantidad >= 1) {
-                let pokemon = new Pokemon(data.name, cantidad, data.base_experience * 100, data.sprites.other["official-artwork"].front_default)
+                let pokemon = new Pokemon(data.name, cantidad, data.base_experience * 100, data.sprites.other["official-artwork"].front_default, data.id)
                 carritoCompras.push(pokemon)
                 localStorage.datosPokemon = JSON.stringify(carritoCompras)
                 carritoPokemon()
@@ -278,7 +278,8 @@ function backInfoPokemon(name) {
             }
 
         })
-}
+    }
+
 function carritoPokemon() {
     let items = ''
     carritoCompras.forEach((element, index) => {
@@ -287,7 +288,7 @@ function carritoPokemon() {
                     <img src="${element._imagen}" style="width: 35%;" alt="">
             </div>
                 <div class="col-6">
-                        <div class="row">Nombre: ${element._nombre}</div>
+                        <div class="row">Nombre: ${element._nombre} - ID: ${element._id}</div>
                         <div class="row">Precio: ${element._precio} x ${element._cantidad} = ${element._precio * element._cantidad}</div>
                         <div class="row">Cantidad: <input onclick="actCantidad(this,${index})" onkeyup="actCantidad(this,${index})" class="form-control" type="number" value="${element._cantidad}"></div>
                         <div class="col-2">
@@ -323,3 +324,19 @@ function actCantidad(element, index) {
 
 }
 
+
+
+function readUser (){
+    axios.get("../controller/read.user.php")
+    .then(function(response){
+    console.log(response);
+    let usuario = "";
+    response.data.forEach((element) => {
+    usuario += `<p>${element.nombre} ${element.apellido}</p>`
+})
+    nombreUsuario.innerHTML = usuario;
+    })
+    .catch(function(error){
+    console.log(error);
+    })
+    };

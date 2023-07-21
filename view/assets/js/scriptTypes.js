@@ -140,10 +140,10 @@ function backInfoPokemon(name) {
     fetch("https://pokeapi.co/api/v2/pokemon/" + name)
         .then(response => response.json())
         .then(data => {
-            // console.log(data);
+            console.log(data.id);
             let cantidad = document.getElementById(`cant${name}`).value
             if (cantidad >= 1) {
-                let pokemon = new Pokemon(data.name, cantidad, data.base_experience * 100, data.sprites.other["official-artwork"].front_default)
+                let pokemon = new Pokemon(data.name, cantidad, data.base_experience * 100, data.sprites.other["official-artwork"].front_default, data.id)
                 carritoCompras.push(pokemon)
                 localStorage.datosPokemon = JSON.stringify(carritoCompras)
                 carritoPokemon()

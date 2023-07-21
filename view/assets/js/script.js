@@ -1,9 +1,10 @@
 class Pokemon {
-    constructor(nombre, cantidad, precio, imagen) {
+    constructor(nombre, cantidad, precio, imagen, id) {
         this._nombre = nombre;
         this._cantidad = cantidad;
         this._precio = precio;
         this._imagen = imagen;
+        this._id = id;
     }
 
     get nombre() {
@@ -33,6 +34,13 @@ class Pokemon {
 
     set imagen(nuevaImagen) {
         this._imagen = nuevaImagen;
+    }
+    get id() {
+        return this._id
+    }
+
+    set imagen(nuevaId) {
+        this._id = nuevaId;
     }
 
 }

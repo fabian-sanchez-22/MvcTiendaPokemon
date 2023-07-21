@@ -1,3 +1,8 @@
+<?php
+session_start();
+$idUsuario = isset($_SESSION["idUsuario"]) ? $_SESSION["idUsuario"] : "";
+?>
+
 <?php include_once "header.php"; ?>
 
 <section class="row justify-content-evenly align-content-around " style="height: 400px;">

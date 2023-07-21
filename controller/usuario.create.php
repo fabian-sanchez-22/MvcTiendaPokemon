@@ -12,6 +12,7 @@ $telefono = $_POST["telefono"];
 $genero = $_POST["genero"];
 $rol = $_POST["rol"];
 
+
 $usuarioM = new \modelo\Usuario;
 
 $usuarioM->setTipoDoc($tipoDoc);
@@ -24,6 +25,7 @@ $usuarioM->setDireccion($direccion);
 $usuarioM->setTelefono($telefono);
 $usuarioM->setGenero($genero);
 $usuarioM->setRol($rol);
+
 
 
 $response = $usuarioM->create();

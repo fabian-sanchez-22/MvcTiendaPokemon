@@ -14,7 +14,6 @@
 </head>
 
 <body onload="readInventario()">
-
     <h1 style="text-align: center;">Modificar Stock de Pokemons</h1>
     <br>
 
