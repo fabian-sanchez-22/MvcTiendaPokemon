@@ -21,6 +21,7 @@ include_once "header.php";
                     <th scope="col">Nombre</th>
                     <th scope="col">Cantidad</th>
                     <th scope="col">Precio</th>
+                    <th scope="col">id Pokemon</th>
                 </tr>
             </thead>
             <tbody id="tableBodyUsuario"></tbody>

@@ -1,4 +1,5 @@
 <?php
+
 include_once "../model/pedido.php";
 
 $codigoPed = $_POST["codigoPed"];
@@ -11,8 +12,9 @@ $fechaEnvPedido = $_POST["fechaEnvPedido"];
 $total = $_POST["total"];
 $idUsu = $_POST["idUsu"];
 
-$pedidoM = new \modelo\Pedido;
+$productos = json_decode($_POST["productos"], true); 
 
+$pedidoM = new \modelo\Pedido;
 $pedidoM->setcodigoPed($codigoPed);
 $pedidoM->setfechaPed($fechaPed);
 $pedidoM->setnombre($nombre);
@@ -23,9 +25,19 @@ $pedidoM->setfechaEnvPedido($fechaEnvPedido);
 $pedidoM->settotal($total);
 $pedidoM->setIdUsu($idUsu);
 
+foreach ($productos as $producto) {
+  $id = $producto['id'];
+  $nombre = $producto['nombre'];
+  $cantidad = $producto['cantidad'];
+  $precio = $producto['precio'];
 
-$response = $pedidoM->createProduct();
+  $pedidoM->setIdPokemon($id);
+  $pedidoM->setNombrePokemon($nombre);
+  $pedidoM->setCantidadPokemon($cantidad);
+  $pedidoM->setPrecioPokemon($precio);
 
-echo json_encode($response);
+  $response = $pedidoM->createProduct();
+  echo "ID: " . $id . ", Nombre: " . $nombre . ", Cantidad: " . $cantidad . ", Respuesta: " . $response . "<br>";
+}
+
 unset($pedidoM);
-unset($response);

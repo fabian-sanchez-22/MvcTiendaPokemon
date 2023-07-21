@@ -1,90 +1,5 @@
-// const carrito = JSON.parse(localStorage.getItem('datosPokemon')) || [];
-
-// // Función para mostrar los productos del carrito en la vista
-// function mostrarProductosDelCarrito() {
-//     const carritoElement = document.getElementById('dndNombre');
-//     carritoElement.innerHTML = '';
-
-//     console.log(carrito);
-
-//     carrito.forEach(producto => {
-//         const { _nombre, _precio, _cantidad } = producto;
-
-//         const nombreProducto = _nombre;
-//         const precioProducto = _precio;
-//         const cantidadProducto = _cantidad;
-
-//         console.log('Nombre:', nombreProducto);
-//         console.log('Precio:', precioProducto);
-//         console.log('Cantidad:', cantidadProducto);
-
-//         // Imprimir el nombre en el campo de entrada
-//         const nombreInput = document.getElementById('dnmNombre');
-//         nombreInput.value = nombreProducto;
-
-//         const listItem = document.createElement('li');
-//         listItem.textContent = `Producto ID: ${nombreProducto} - Precio: ${precioProducto} - Cantidad: ${cantidadProducto}`;
-//         carritoElement.appendChild(listItem);
-//     });
-// }
-
-// mostrarProductosDelCarrito();
-
-    // Recuperar los datos del carrito desde LocalStorage
-    // const carrito = JSON.parse(localStorage.getItem('datosPokemon')) || [];
-
-    // function mostrarProductosDelCarrito() {
-    //     const nombreInput = document.getElementById('dnmNombre');
-    //     const cantidadInput = document.getElementById('dnmCantidad');
-    //     const precioInput = document.getElementById('dnmPrecio');
-    
-    //     carrito.forEach(producto => {
-    //         const { _nombre, _precio, _cantidad } = producto;
-    
-    //         console.log('Nombre:', _nombre);
-    //         console.log('Precio:', _precio);
-    //         console.log('Cantidad:', _cantidad);
-    
-    //         nombreInput.value = _nombre;
-    //         cantidadInput.value = _cantidad;
-    //         precioInput.value = _precio;
-    //     });
-    // }
-    
-    // mostrarProductosDelCarrito();
-    
-
-    function createProduct() {
-        const total = document.getElementById('totalId').textContent;
-        const codigoPedido = generarCodigoPedido(3);
-
-        let data = `codigoPed=${codigoPedido}&fechaPed=${txtFecha.value}&nombre=${txtNombre.value}&direccion=${txtDireccion.value}&telefono=${txtTelefono.value}&formaPago=${selFormaPago.value}&fechaEnvPedido=${txtFechaEnvio.value}&total=${total}&idUsu=${txtUser.value}`
-
-        axios.post('../controller/pedido.create.php', data)
-        .then(function(response){
-        console.log(response);
-        console.log(data);
-        alert("Pedido tomado ");
-    })
-        .catch(function(error){
-        console.log(error);
-});
-    }
-
-
-
-    function generarCodigoPedido(longitud) {
-        let codigo = '';
-        for (let i = 0; i < longitud; i++) {
-          codigo += Math.floor(Math.random() * 10); // Generar un dígito aleatorio del 0 al 9
-        }
-    
-        return codigo;
-    }
-
-
-
 const carrito = JSON.parse(localStorage.getItem('datosPokemon')) || [];
+const productosParaGuardar = [];
 
 mostrarProductosDelCarrito();
 
@@ -100,7 +15,7 @@ function mostrarProductosDelCarrito() {
     console.log('Nombre:', _nombre);
     console.log('Precio:', _precio);
     console.log('Cantidad:', _cantidad);
-    console.log('Id:', _id)
+    console.log('Id:', _id);
 
     const tr = document.createElement('tr');
 
@@ -114,17 +29,29 @@ function mostrarProductosDelCarrito() {
     cantidadInput.addEventListener('input', function () {
       const newCantidad = parseInt(this.value);
       producto._cantidad = newCantidad;
-      precioTd.textContent = (_precio * newCantidad)
+      precioTd.textContent = (_precio * newCantidad);
       actualizarTotal();
     });
     cantidadTd.appendChild(cantidadInput);
 
     const precioTd = document.createElement('td');
-    precioTd.textContent = (_precio * _cantidad)
+    precioTd.textContent = (_precio * _cantidad);
+
+    const idTd = document.createElement('td');
+    idTd.textContent = _id;
 
     tr.appendChild(nombreTd);
     tr.appendChild(cantidadTd);
     tr.appendChild(precioTd);
+    tr.appendChild(idTd); // Agregar la celda de ID a la fila
+
+    // Agregar los datos del producto al array para guardarlos en la base de datos
+    productosParaGuardar.push({
+      id: _id,
+      nombre: _nombre,
+      cantidad: _cantidad,
+      precio: _precio
+    });
 
     total += _precio * _cantidad;
 
@@ -132,8 +59,8 @@ function mostrarProductosDelCarrito() {
   });
 
   const totalTd = document.createElement('td');
-  totalTd.colSpan = 3;
-  totalTd.textContent = total
+  totalTd.colSpan = 4; // Ajustar la cantidad de columnas para el total y el ID
+  totalTd.textContent = total;
   totalTd.id = 'totalId'; // Asignar un ID al elemento del total
 
   totalRow.appendChild(totalTd);
@@ -146,9 +73,38 @@ function mostrarProductosDelCarrito() {
       total += producto._precio * producto._cantidad;
     });
 
-    totalTd.textContent = total
+    totalTd.textContent = total;
   }
 }
+
+function createProduct() {
+  const total = document.getElementById('totalId').textContent;
+  const codigoPedido = generarCodigoPedido(3);
+
+  // Convertir el array de productosParaGuardar en una cadena JSON para enviarlo al servidor
+  const productosJson = JSON.stringify(productosParaGuardar);
+  console.log(productosJson);
+
+  let data = `codigoPed=${codigoPedido}&fechaPed=${txtFecha.value}&nombre=${txtNombre.value}&direccion=${txtDireccion.value}&telefono=${txtTelefono.value}&formaPago=${selFormaPago.value}&fechaEnvPedido=${txtFechaEnvio.value}&total=${total}&idUsu=${txtUser.value}&productos=${productosJson}`;
+
+  axios.post('../controller/pedido.create.php', data)
+    .then(function(response){
+      alert("Pedido tomado ");
+    })
+    .catch(function(error){
+      console.log(error);
+    });
+}
+
+function generarCodigoPedido(longitud) {
+  let codigo = '';
+  for (let i = 0; i < longitud; i++) {
+    codigo += Math.floor(Math.random() * 10); // Generar un dígito aleatorio del 0 al 9
+  }
+
+  return codigo;
+}
+
 
 function readUser (){
   axios.get("../controller/read.user.php")

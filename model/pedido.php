@@ -16,6 +16,15 @@ class Pedido
     private $fechaEnvPedido;
     private $total;
     private $idUsu;
+
+    private $idPokemon;
+    private $cantidadPokemon;
+    private $nombrePokemon;
+    private $precioPokemon;
+
+
+    private $productos;
+    
     
     private $conexion;
 
@@ -25,10 +34,11 @@ class Pedido
         $this->conexion = new \Conexion;
     }
 
+
     public function createProduct()
     {
         try {
-            $sql = $this->conexion->getConPDO()->prepare("INSERT INTO pedidos(codigoPed, fechaPed, nombre, direccion, telefono, formaPago, totalPed, fechaEnvPedido, idUsu) VALUES (?,?,?,?,?,?,?,?,?)");
+            $sql = $this->conexion->getConPDO()->prepare("INSERT INTO pedidos(codigoPed, fechaPed, nombre, direccion, telefono, formaPago, totalPed, fechaEnvPedido, idUsu, idPokemon, cantidadPokemon, nombrePokemon, precioUnit) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             $sql->bindParam(1, $this->codigoPed);
             $sql->bindParam(2, $this->fechaPed);
             $sql->bindParam(3, $this->nombre);
@@ -38,6 +48,10 @@ class Pedido
             $sql->bindParam(7, $this->total);
             $sql->bindParam(8, $this->fechaEnvPedido);
             $sql->bindParam(9, $this->idUsu);
+            $sql->bindParam(10, $this->idPokemon);
+            $sql->bindParam(11, $this->cantidadPokemon);
+            $sql->bindParam(12, $this->nombrePokemon);
+            $sql->bindParam(13, $this->precioPokemon);
             $sql->execute();
             return "Producto Creado";
         } catch (\PDOException $e) {
@@ -206,6 +220,98 @@ class Pedido
     public function setIdUsu($idUsu): self
     {
         $this->idUsu = $idUsu;
+
+        return $this;
+    }
+
+
+
+//     /**
+//      * Get the value of idPokemon
+//      */
+    public function getIdPokemon()
+    {
+        return $this->idPokemon;
+    }
+
+//     /**
+//      * Set the value of idPokemon
+//      */
+    public function setIdPokemon($idPokemon): self
+    {
+        $this->idPokemon = $idPokemon;
+
+        return $this;
+    }
+
+//     /**
+//      * Get the value of cantidadPokemon
+//      */
+    public function getCantidadPokemon()
+    {
+        return $this->cantidadPokemon;
+    }
+
+    /**
+     * Set the value of cantidadPokemon
+     */
+    public function setCantidadPokemon($cantidadPokemon): self
+    {
+        $this->cantidadPokemon = $cantidadPokemon;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nombrePokemon
+     */
+    public function getNombrePokemon()
+    {
+        return $this->nombrePokemon;
+    }
+
+    /**
+     * Set the value of nombrePokemon
+     */
+    public function setNombrePokemon($nombrePokemon): self
+    {
+        $this->nombrePokemon = $nombrePokemon;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of productos
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    /**
+     * Set the value of productos
+     */
+    public function setProductos($productos): self
+    {
+        $this->productos = $productos;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of precioPokeon
+     */
+    public function getPrecioPokemon()
+    {
+        return $this->precioPokemon;
+    }
+
+    /**
+     * Set the value of precioPokeon
+     */
+    public function setPrecioPokemon($precioPokeon): self
+    {
+        $this->precioPokemon = $precioPokeon;
 
         return $this;
     }
