@@ -74,6 +74,17 @@ class Pedido
             return "Error: " . $e->getMessage();
         }
     }
+
+    public function readPedidos(){
+    try {
+        $sql = $this->conexion->getConPDO()->prepare("SELECT codigoPed, fechaPed, nombre, direccion, telefono, nombrePokemon, cantidadPokemon, totalPed FROM pedidos");
+        $sql->execute();
+        $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    } catch (\PDOException $e) {
+        return "Error " . $e->getMessage();
+    }
+    }
     
 
     /**

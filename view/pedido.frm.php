@@ -10,6 +10,43 @@ include_once "header.php";
         font-size: 20px;
         font-weight: bold;
     }
+
+    
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  .pokemon-names {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .pokemon-name {
+    margin: 2px;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+  }
     </style>
 
 <div class="row mt-5 d-flex justify-content-center">
@@ -46,13 +83,13 @@ include_once "header.php";
     </div>
 
     <div class="col-2">
-        <span class="fw-bolder">Nombre:</spam>
+        <span class="fw-bolder">Nombre y apellidos:</spam>
     </div>
 
     <div class="col-4">
         <div class="form-floating">
             <input type="text" name="txtNombre" id="txtNombre" class="form-control" placeholder=".">
-            <label for="floatingInput">Nombre</label>
+            <label for="floatingInput">Nombre y apellidos</label>
         </div>
     </div>
 </div>
@@ -133,7 +170,7 @@ include_once "header.php";
 
 <div class="row mt-5 justify-content-center">
     <div class="col-4 d-grid gap-2">
-        <a onclick="createProduct()" class="btn btn-primary">Realizar Pedido</a>
+        <a onclick="createProduct(), readPedidos()" class="btn btn-primary">Realizar Pedido</a>
     </div>
 </div>
 

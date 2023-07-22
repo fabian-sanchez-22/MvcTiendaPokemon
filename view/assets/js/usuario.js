@@ -100,6 +100,79 @@ console.log(error);
 })
 }
 
+// Se muestran sin agrupar 
+// function readPedidos(){
+// axios.get("../controller/pedidos.read.php")
+// .then(function (response){
+// console.log(response.data);
+// let ped = "";
+// response.data.forEach((element, index) => {
+//     ped += `<tr>`;
+//     ped += `<th scope="row">${index + 1}</th>`;
+//     ped += ` <td>${element.codigoPed}</td>`;
+//     ped += ` <td>${element.fechaPed}</td>`;
+//     ped += ` <td>${element.nombre}</td>`;
+//     ped += ` <td>${element.direccion}</td>`;
+//     ped += ` <td>${element.telefono}</td>`;
+//     ped += ` <td>${element.nombrePokemon}</td>`;
+//     ped += ` <td>${element.cantidadPokemon}</td>`;
+//     ped += ` <td>${element.totalPed}</td>`;
+//     ped += ` <tr>`
+// });
+// tablePedidos.innerHTML = ped;
+// })
+// .catch(function (error){
+// console.log(error);
+// })
+// }
+
+// readPedidos()
+
+
+function readPedidos() {
+    axios.get("../controller/pedidos.read.php")
+      .then(function (response) {
+        console.log(response.data);
+        let ped = "";
+        let prevCodigoPed = null; // Variable para comparar el código de pedido anterior
+        let rowCount = 1; // Contador de filas
+
+        response.data.forEach((element) => {
+          if (prevCodigoPed === null || prevCodigoPed !== element.codigoPed) {
+            // Si es el primer registro o el código de pedido cambió, crea una nueva fila
+            if (prevCodigoPed !== null) {
+              // Si no es el primer registro, cierra la fila anterior
+              ped += `</tr>`;
+            }
+            ped += `<tr>`;
+            ped += `<th scope="row">${rowCount}</th>`;
+            ped += ` <td>${element.codigoPed}</td>`;
+            ped += ` <td>${element.fechaPed}</td>`;
+            ped += ` <td>${element.nombre}</td>`;
+            ped += ` <td>${element.direccion}</td>`;
+            ped += ` <td>${element.telefono}</td>`;
+            ped += ` <td>${element.totalPed}</td>`;
+            rowCount++;
+          }
+          ped += ` <td>${element.nombrePokemon}</td>`;
+          
+          prevCodigoPed = element.codigoPed;
+        });
+
+        if (prevCodigoPed !== null) {
+          // Si hay registros, cierra la última fila
+          ped += `</tr>`;
+        }
+
+        tablePedidos.innerHTML = ped;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  // Llamar a la función para obtener y mostrar los pedidos al cargar la página
+  readPedidos();
 
 
 
