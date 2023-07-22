@@ -43,9 +43,9 @@ function mostrarProductosDelCarrito() {
     tr.appendChild(nombreTd);
     tr.appendChild(cantidadTd);
     tr.appendChild(precioTd);
-    tr.appendChild(idTd); // Agregar la celda de ID a la fila
+    tr.appendChild(idTd); 
 
-    // Agregar los datos del producto al array para guardarlos en la base de datos
+    
     productosParaGuardar.push({
       id: _id,
       nombre: _nombre,
@@ -59,9 +59,9 @@ function mostrarProductosDelCarrito() {
   });
 
   const totalTd = document.createElement('td');
-  totalTd.colSpan = 4; // Ajustar la cantidad de columnas para el total y el ID
+  totalTd.colSpan = 4; 
   totalTd.textContent = total;
-  totalTd.id = 'totalId'; // Asignar un ID al elemento del total
+  totalTd.id = 'totalId'; 
 
   totalRow.appendChild(totalTd);
   tableBodyUsuario.appendChild(totalRow);
@@ -81,7 +81,7 @@ function createProduct() {
   const total = document.getElementById('totalId').textContent;
   const codigoPedido = generarCodigoPedido(3);
 
-  // Convertir el array de productosParaGuardar en una cadena JSON para enviarlo al servidor
+
   const productosJson = JSON.stringify(productosParaGuardar);
   console.log(productosJson);
 
@@ -89,6 +89,8 @@ function createProduct() {
 
   axios.post('../controller/pedido.create.php', data)
     .then(function(response){
+      console.log(response);
+      console.log(response.data);
       alert("Pedido tomado ");
     })
     .catch(function(error){
@@ -99,7 +101,7 @@ function createProduct() {
 function generarCodigoPedido(longitud) {
   let codigo = '';
   for (let i = 0; i < longitud; i++) {
-    codigo += Math.floor(Math.random() * 10); // Generar un dígito aleatorio del 0 al 9
+    codigo += Math.floor(Math.random() * 10); 
   }
 
   return codigo;

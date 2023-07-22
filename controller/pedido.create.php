@@ -14,30 +14,36 @@ $idUsu = $_POST["idUsu"];
 
 $productos = json_decode($_POST["productos"], true); 
 
-$pedidoM = new \modelo\Pedido;
-$pedidoM->setcodigoPed($codigoPed);
-$pedidoM->setfechaPed($fechaPed);
-$pedidoM->setnombre($nombre);
-$pedidoM->setdireccion($direccion);
-$pedidoM->settelefono($telefono);
-$pedidoM->setformaPago($formaPago);
-$pedidoM->setfechaEnvPedido($fechaEnvPedido);
-$pedidoM->settotal($total);
-$pedidoM->setIdUsu($idUsu);
 
-foreach ($productos as $producto) {
+
+foreach ($productos as $key => $producto) {
+
   $id = $producto['id'];
-  $nombre = $producto['nombre'];
+  $nombreP = $producto['nombre'];
   $cantidad = $producto['cantidad'];
   $precio = $producto['precio'];
 
+$pedidoM = new \modelo\Pedido;
+  $pedidoM->setcodigoPed($codigoPed);
+  $pedidoM->setfechaPed($fechaPed);
+  $pedidoM->setnombre($nombre);
+  $pedidoM->setdireccion($direccion);
+  $pedidoM->settelefono($telefono);
+  $pedidoM->setformaPago($formaPago);
+  $pedidoM->setfechaEnvPedido($fechaEnvPedido);
+  $pedidoM->settotal($total);
+  $pedidoM->setIdUsu($idUsu);
   $pedidoM->setIdPokemon($id);
-  $pedidoM->setNombrePokemon($nombre);
+  $pedidoM->setNombrePokemon($nombreP);
   $pedidoM->setCantidadPokemon($cantidad);
   $pedidoM->setPrecioPokemon($precio);
 
+
   $response = $pedidoM->createProduct();
-  echo "ID: " . $id . ", Nombre: " . $nombre . ", Cantidad: " . $cantidad . ", Respuesta: " . $response . "<br>";
+  unset($pedidoM);
 }
 
-unset($pedidoM);
+
+
+
+
