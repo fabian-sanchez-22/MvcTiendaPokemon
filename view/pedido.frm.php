@@ -174,8 +174,26 @@ include_once "header.php";
     </div>
 </div>
 
+<h1 class="bg-dark py-1 text-center text-white">Mis pedidos</h1>
+<div class="row mt-5 d-flex justify-content-center">
+    <div class="col-10">
+        <table class="table" id="tableUsuario">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">id Pokemon</th>
+                </tr>
+            </thead>
+            <tbody id="tableBodyPedidos"></tbody>
+        </table>
+    </div>
+</div>
+
 <style></style>
 
 <script src="./assets/js/axios.min.js"></script>
+<script src="./assets/js/usuario.js"></script>
 <script src="./assets/js/formCompra.js"></script>
 

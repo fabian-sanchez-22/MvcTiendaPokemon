@@ -89,6 +89,18 @@ class Pedido
     }
     }
 
+    public function readPedidosUsuarios(){
+    try {
+        $sql = $this->conexion->getConPDO()->prepare("SELECT * FROM pedidos WHERE idUsu=?");
+        $sql->bindParam(1, $this->idUsu);
+        $sql->execute();
+        $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    } catch (\PDOException $e) {
+        return "Error" . $e->getMessage();
+    }
+    }
+
 
     public function updateEstado(){
     try {

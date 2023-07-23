@@ -217,12 +217,107 @@ function actualizarEstadoPedido(codigoPed, estadoActualizado) {
 }
 
 
-function readPedidosUsuario (){
-axios.get("../controller/read.pedidos.usuarios.php")
-.then(function(response) {
-console.log(response);
-})
-.catch(function(error){
-console.log(error);
-})
+var id;
+
+// Función para obtener el ID de usuario mediante AJAX
+function obtenerIdUsuario() {
+    fetch("../controller/obtenerIdUsuario.php")
+        .then(response => response.json())
+        .then(data => {
+            id = data.id;
+            readPedidos(id); // Llamamos a la función read después de obtener el ID
+        })
+        .catch(error => {
+            console.error("Error al obtener el ID de usuario:", error);
+        });
+}
+
+obtenerIdUsuario();
+
+function readPedidos() {
+  axios.get(`../controller/pedido.read.php?id=${id}`)
+      .then(function (response) {
+          console.log(response.data);
+          let ped = "";
+          let prevCodigoPed = null; // Variable para comparar el código de pedido anterior
+
+
+          response.data.forEach((element) => {
+              if (prevCodigoPed === null || prevCodigoPed !== element.codigoPed) {
+                  // Si es el primer registro o el código de pedido cambió, crea una nueva fila
+                  if (prevCodigoPed !== null) {
+                      // Si no es el primer registro, cierra la fila anterior
+                      ped += `</tr>`;
+                  }
+                  ped += `<tr>`;
+
+                  ped += ` <td>${element.id}</td>`;
+                  ped += ` <td>${element.codigoPed}</td>`;
+                  ped += ` <td>${element.formaPago}</td>`;
+                  ped += `<td> <select name="selRecibido" id="selEstadoPedido${element.idUsu}" class="form-control" onchange="actualizarEstado(${element.idUsu}, '${element.codigoPed}')">
+                  <option value="${element.estadoPedido}" selected disabled>${element.estadoPedido}</option>
+                  <option value="Recibido">Recibido</option>
+                  </select></td>`
+  
+  
+                  }
+  
+                  prevCodigoPed = element.codigoPed;
+              });
+  
+              if (prevCodigoPed !== null) {
+                  // Si hay registros, cierra la última fila
+                  ped += `</tr>`;
+              }
+  
+              tableBodyPedidos.innerHTML = ped;
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+  }
+readPedidos();
+
+
+
+function actualizarEstado(idUsu, codigoPed) {
+  const selectElement = document.getElementById(`selEstadoPedido${idUsu}`);
+  const nuevoEstado = selectElement.value;
+
+  const data = `idUsu=${idUsu}&estadoActualizado=${nuevoEstado}&codigoPed=${codigoPed}`;
+  fetch("../controller/estado.update.php", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: data,
+  })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          if (data.success) {
+              // Si la actualización del estado del pedido fue exitosa, actualizar todos los pedidos con el mismo código de pedido
+              actualizarPedidosPorCodigo(codigoPed, nuevoEstado);
+          }
+      })
+      .catch(error => {
+          console.error("Error al actualizar el estado:", error);
+      });
+}
+function actualizarPedidosPorCodigo(codigoPed, nuevoEstado) {
+  fetch("../controller/read.update.estado.php", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `codigoPed=${codigoPed}&estadoActualizado=${nuevoEstado}`,
+  })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+          alert("Estado actualizado para todos los pedidos con el mismo código de pedido");
+      })
+      .catch(error => {
+          console.error("Error al actualizar los pedidos:", error);
+        });
 }
