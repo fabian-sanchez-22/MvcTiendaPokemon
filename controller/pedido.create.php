@@ -14,7 +14,7 @@ $idUsu = $_POST["idUsu"];
 
 $productos = json_decode($_POST["productos"], true); 
 
-
+var_dump($productos);
 
 foreach ($productos as $key => $producto) {
 

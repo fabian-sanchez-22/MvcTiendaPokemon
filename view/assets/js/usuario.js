@@ -100,7 +100,6 @@ console.log(error);
 })
 }
 
-// Se muestran sin agrupar 
 // function readPedidos(){
 // axios.get("../controller/pedidos.read.php")
 // .then(function (response){
@@ -128,55 +127,102 @@ console.log(error);
 
 // readPedidos()
 
-
 function readPedidos() {
-    axios.get("../controller/pedidos.read.php")
+  axios.get("../controller/pedidos.read.php")
       .then(function (response) {
-        console.log(response.data);
-        let ped = "";
-        let prevCodigoPed = null; // Variable para comparar el código de pedido anterior
-        let rowCount = 1; // Contador de filas
+          console.log(response.data);
+          let ped = "";
+          let prevCodigoPed = null; // Variable para comparar el código de pedido anterior
 
-        response.data.forEach((element) => {
-          if (prevCodigoPed === null || prevCodigoPed !== element.codigoPed) {
-            // Si es el primer registro o el código de pedido cambió, crea una nueva fila
+
+          response.data.forEach((element) => {
+              if (prevCodigoPed === null || prevCodigoPed !== element.codigoPed) {
+                  // Si es el primer registro o el código de pedido cambió, crea una nueva fila
+                  if (prevCodigoPed !== null) {
+                      // Si no es el primer registro, cierra la fila anterior
+                      ped += `</tr>`;
+                  }
+                  ped += `<tr>`;
+
+                  ped += `<td>${element.codigoPed}</td>`
+                  ped += `<td>${element.fechaPed}</td>`
+                  ped += `<td>${element.nombre}</td>`
+                  ped += `<td>${element.direccion}</td>`
+                  ped += `<td>${element.telefono}</td>`
+                  ped += `<td>${element.cantidadPokemon}</td>`
+                  ped += `<td>${element.totalPed}</td>`
+                  ped += `<td> <select name="selRecibido" id="selEstadoPedido${element.idUsu}" class="form-control" 
+                  onchange="actualizarEstado(${element.idUsu}, '${element.codigoPed}')">
+                    <option value="${element.estadoPedido}" selected disabled>${element.estadoPedido}</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Enviado">Enviado</option>
+                    <option value="Cancelado">Cancelado</option>
+                </select></td>`
+
+
+                }
+
+                prevCodigoPed = element.codigoPed;
+                ped += ` <td>${element.nombrePokemon}</td>`;
+            });
+
             if (prevCodigoPed !== null) {
-              // Si no es el primer registro, cierra la fila anterior
-              ped += `</tr>`;
+                // Si hay registros, cierra la última fila
+                ped += `</tr>`;
             }
-            ped += `<tr>`;
-            ped += `<th scope="row">${rowCount}</th>`;
-            ped += ` <td>${element.codigoPed}</td>`;
-            ped += ` <td>${element.fechaPed}</td>`;
-            ped += ` <td>${element.nombre}</td>`;
-            ped += ` <td>${element.direccion}</td>`;
-            ped += ` <td>${element.telefono}</td>`;
-            ped += ` <td>${element.totalPed}</td>`;
-            rowCount++;
-          }
-          ped += ` <td>${element.nombrePokemon}</td>`;
-          
-          prevCodigoPed = element.codigoPed;
+
+            tablePedidos.innerHTML = ped;
+        })
+        .catch(function (error) {
+            console.log(error);
         });
-
-        if (prevCodigoPed !== null) {
-          // Si hay registros, cierra la última fila
-          ped += `</tr>`;
-        }
-
-        tablePedidos.innerHTML = ped;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
-  // Llamar a la función para obtener y mostrar los pedidos al cargar la página
-  readPedidos();
+}
+readPedidos();
 
 
 
+function actualizarEstado(idUsu, codigoPed) {
+  const elementUsu = document.getElementById(`selEstadoPedido${idUsu}`);
+  const estadoActualizado = elementUsu.value;
+  const data = `idUsu=${idUsu}&estadoActualizado=${estadoActualizado}&codigoPed=${codigoPed}`;
+  console.log(data);
+  axios.post("../controller/estado.update.php", data) // Aquí pasamos el objeto data como segundo parámetro
+    .then(function (response) {
+      console.log(response);
+      if (response.success) {
+        actualizarEstadoPedido(codigoPed, estadoActualizado);
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
 
 
 
+function actualizarEstadoPedido(codigoPed, estadoActualizado) {
+  const data = `codigoPed=${codigoPed}&estadoActualizado=${estadoActualizado}`;
+  axios.post("../controller/read.update.estado.php", data, {
+      headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+      },
+  })
+  .then(response => {
+      console.log(response.data);
+      alert("Estado actualizado para todos los pedidos con el mismo código de pedido");
+  })
+  .catch(error => {
+      console.error("Error al actualizar los pedidos:", error);
+    });
+}
 
+
+function readPedidosUsuario (){
+axios.get("../controller/read.pedidos.usuarios.php")
+.then(function(response) {
+console.log(response);
+})
+.catch(function(error){
+console.log(error);
+})
+}

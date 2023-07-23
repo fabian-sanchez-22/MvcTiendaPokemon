@@ -33,6 +33,11 @@
                 </table>
             </div>
         </div>
+
+        <div class="col-3">
+        <a href="pedidos.frm.php" class="btn btn-primary" style="margin-top: 30px;" >Ir a ver los pedidos</a>
+        </div>
+
     </div>
 
     <!-- Modal para modificar la cantidad -->

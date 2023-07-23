@@ -176,5 +176,6 @@ include_once "header.php";
 
 <style></style>
 
-<script src="./assets/js/formCompra.js"></script>
 <script src="./assets/js/axios.min.js"></script>
+<script src="./assets/js/formCompra.js"></script>
+

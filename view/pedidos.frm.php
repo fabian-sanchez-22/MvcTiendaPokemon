@@ -23,13 +23,14 @@
                 <table style="width: 1300px; margin-left: 40px; ">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Codigo Pedido</th>
                             <th>Fecha</th>
                             <th>Nombre</th>
                             <th>Direccion</th>
                             <th>telefono</th>
+                            <th>cantidad</th>
                             <th>Total a pagar</th>
+                            <th>Estado</th>
                             <th>Articulo(s)</th>
                         </tr>
                     </thead>

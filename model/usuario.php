@@ -71,14 +71,31 @@ class Usuario
             $sql->execute();
             $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
             return $result;
-
-        } catch (\PDOException $err) {
-            return "Error: " + $err->getMessage();
-        }
-    }
-
-
+            // Check if the user was found in the database
+            if (count($result) > 0) {
+                // Assuming the 'rol' column stores the role information for each user
+                $userRole = $result[0]['rol'];
     
+                // Start the session and store user information
+                session_start();
+                $_SESSION["nombre"] = $result[0]["nombre"];
+                $_SESSION["correo"] = $result[0]["correo"];
+                $_SESSION["id_usuario"] = $result[0]["id"];
+    
+                // Now you can store the role in the session as well
+                $_SESSION["rol"] = $userRole;
+    
+                // Return the user information as JSON
+                echo json_encode($result);
+            } else {
+                // Return an empty JSON if the user is not found
+                echo json_encode(array());
+            }
+        } catch (\PDOException $e) {
+            return "Error: " . $e->getMessage();
+        }
+    }    
+
 
 
     public function readInventario(){

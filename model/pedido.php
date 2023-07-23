@@ -23,6 +23,9 @@ class Pedido
     private $precioPokemon;
 
 
+    private $EstadoPedido = 'Pendiente'; 
+
+
     private $productos;
     
     
@@ -77,7 +80,7 @@ class Pedido
 
     public function readPedidos(){
     try {
-        $sql = $this->conexion->getConPDO()->prepare("SELECT codigoPed, fechaPed, nombre, direccion, telefono, nombrePokemon, cantidadPokemon, totalPed FROM pedidos");
+        $sql = $this->conexion->getConPDO()->prepare("SELECT * FROM pedidos");
         $sql->execute();
         $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
         return $result;
@@ -85,6 +88,36 @@ class Pedido
         return "Error " . $e->getMessage();
     }
     }
+
+
+    public function updateEstado(){
+    try {
+        $sql = $this->conexion->getConPDO()->prepare("UPDATE pedidos SET estadoPedido =? WHERE idUsu=? AND codigoPed=?");
+        $sql->bindParam(1, $this->EstadoPedido);
+        $sql->bindParam(2, $this->idUsu);
+        $sql->bindParam(3, $this->codigoPed);
+        $sql->execute();
+        $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+        return $result; 
+    } catch (\PDOException $e) {
+        return "Error" . $e->getMessage();
+    }
+    }
+
+    public function readUpdateEstado(){
+        try {
+            $sql = $this->conexion->getConPDO()->prepare("UPDATE pedidos SET estadoPedido =? WHERE codigoPed=?");
+            $sql->bindParam(1, $this->EstadoPedido);
+            $sql->bindParam(2, $this->codigoPed);
+            $sql->execute();
+            $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+            return $result; 
+        } catch (\PDOException $e) {
+            return "Error" . $e->getMessage();
+        }
+        }
+
+    
     
 
     /**
@@ -323,6 +356,24 @@ class Pedido
     public function setPrecioPokemon($precioPokeon): self
     {
         $this->precioPokemon = $precioPokeon;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of EstadoPedido
+     */
+    public function getEstadoPedido()
+    {
+        return $this->EstadoPedido;
+    }
+
+    /**
+     * Set the value of EstadoPedido
+     */
+    public function setEstadoPedido($EstadoPedido): self
+    {
+        $this->EstadoPedido = $EstadoPedido;
 
         return $this;
     }
