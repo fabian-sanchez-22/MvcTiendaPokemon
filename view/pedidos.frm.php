@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
-    <script src="./assets/js/usuario.js"></script>
     <script src="./assets/Js/axios.min.js"></script>
+    <script src="./assets/Js/admin.js"></script>
     <script src="./assets/Js/bootstrap.js"></script>
     <script src="./assets/Js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/bootstrap.css">
 </head>
 
-<body onload="readPedidos()">
+<body onload="readPedidos2()">
     <h1 style="text-align: center;">Pedidos Realizados</h1>
     <br>
 
@@ -45,3 +45,4 @@
 </body>
 
 </html>
+

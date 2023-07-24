@@ -92,6 +92,7 @@ function createProduct() {
       console.log(response);
       console.log(response.data);
       alert("Pedido tomado ");
+      readPedidos();
     })
     .catch(function(error){
       console.log(error);

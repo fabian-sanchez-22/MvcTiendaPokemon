@@ -174,6 +174,10 @@ include_once "header.php";
     </div>
 </div>
 
+<br>
+<br>
+<br>
+
 <h1 class="bg-dark py-1 text-center text-white">Mis pedidos</h1>
 <div class="row mt-5 d-flex justify-content-center">
     <div class="col-10">
