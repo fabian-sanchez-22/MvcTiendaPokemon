@@ -52,6 +52,7 @@ function selectRol(){
         .then(function(response){
             let tabla = "";
         response.data.forEach((element) => {
+
         tabla += `<tr>`;
         tabla += `<td>${element.id}</td>`;
         tabla += `<td>${element.name}</td>`;
@@ -59,9 +60,11 @@ function selectRol(){
         tabla += `<td>
         <a onclick="readStock(${element.id}, ${element.life})" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModals">Modificar</a>
                 </td>`;
-        tabla += `<tr>`;
+        tabla += `</tr>`;
+        obtnerIdPokemon(element.id, element.life);
         })
         tableInventario.innerHTML = tabla;
+
         })
         .catch(function(error){
         console.log(error);
@@ -100,46 +103,43 @@ console.log(error);
 })
 }
 
-// function readPedidos(){
-// axios.get("../controller/pedidos.read.php")
-// .then(function (response){
-// console.log(response.data);
-// let ped = "";
-// response.data.forEach((element, index) => {
-//     ped += `<tr>`;
-//     ped += `<th scope="row">${index + 1}</th>`;
-//     ped += ` <td>${element.codigoPed}</td>`;
-//     ped += ` <td>${element.fechaPed}</td>`;
-//     ped += ` <td>${element.nombre}</td>`;
-//     ped += ` <td>${element.direccion}</td>`;
-//     ped += ` <td>${element.telefono}</td>`;
-//     ped += ` <td>${element.nombrePokemon}</td>`;
-//     ped += ` <td>${element.cantidadPokemon}</td>`;
-//     ped += ` <td>${element.totalPed}</td>`;
-//     ped += ` <tr>`
-// });
-// tablePedidos.innerHTML = ped;
-// })
-// .catch(function (error){
-// console.log(error);
-// })
-// }
 
-// readPedidos()
+function obtnerIdPokemon(id, life){
+axios.get(`../controller/buscar.id.pokemon.php?idPoke=${id}`)
+.then (function(response){
+    let idPokemon = response.data[0].idPokemon;
+    let cantidadPokemon = parseInt(life - response.data[0].cantidadPokemon)
+    descontar(idPokemon, cantidadPokemon);
 
+})
+.catch(function(error){
+console.log(error);
+})
+}
 
+function descontar (idPokemon, cantidadPokemon){
+    let data = `idPokemon=${idPokemon}&cantidad=${cantidadPokemon}`
+axios.post("../controller/descontar.pokemon.php", data)
+.then(function(response){
 
+readInventario();
+})
+.catch(function(error){
+console.log(error);
+})
+}
+
+descontar();
 
 
 var id;
 
-// Función para obtener el ID de usuario mediante AJAX
 function obtenerIdUsuario() {
     fetch("../controller/obtenerIdUsuario.php")
         .then(response => response.json())
         .then(data => {
             id = data.id;
-            readPedidos(id); // Llamamos a la función read después de obtener el ID
+            readPedidos(id); 
         })
         .catch(error => {
             console.error("Error al obtener el ID de usuario:", error);
@@ -153,14 +153,12 @@ function readPedidos() {
       .then(function (response) {
           console.log(response.data);
           let ped = "";
-          let prevCodigoPed = null; // Variable para comparar el código de pedido anterior
-
+          let prevCodigoPed = null; 
 
           response.data.forEach((element) => {
               if (prevCodigoPed === null || prevCodigoPed !== element.codigoPed) {
-                  // Si es el primer registro o el código de pedido cambió, crea una nueva fila
+                  
                   if (prevCodigoPed !== null) {
-                      // Si no es el primer registro, cierra la fila anterior
                       ped += `</tr>`;
                   }
                   ped += `<tr>`;
@@ -180,7 +178,7 @@ function readPedidos() {
               });
   
               if (prevCodigoPed !== null) {
-                  // Si hay registros, cierra la última fila
+                  
                   ped += `</tr>`;
               }
   
@@ -210,7 +208,7 @@ function actualizarEstado(idUsu, codigoPed) {
       .then(data => {
           console.log(data);
           if (data.success) {
-              // Si la actualización del estado del pedido fue exitosa, actualizar todos los pedidos con el mismo código de pedido
+              
               actualizarPedidosPorCodigo(codigoPed, nuevoEstado);
           }
       })

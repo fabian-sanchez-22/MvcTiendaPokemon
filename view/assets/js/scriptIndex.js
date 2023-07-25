@@ -231,22 +231,6 @@ function backInfoPokemon(name) {
 
         })
 }
-// function carritoPokemon() {
-//     let items = ''
-//     carritoCompras.forEach(element => {
-//         items += `
-//             <div class="row my-3">
-//                     <img src="${element._imagen}" style="width: 35%;" alt="">
-//             </div>
-//                     <div class="col-8">
-//                         <div class="row">Nombre: ${element._nombre}</div>
-//                         <div class="row">Precio: ${element._precio} x ${element._cantidad} = ${element._precio * element._cantidad}</div>
-//                          <div class="row">Cantidad: ${element._cantidad}</div>
-//             </div>`
-//     })
-//     document.getElementById("listcarpokemon").innerHTML = items
-//     document.getElementById("cantidadItems").innerHTML = `${carritoCompras.length}+`
-// }
 
 function traerCompra() {
     let datos = JSON.parse(localStorage.datosPokemon)

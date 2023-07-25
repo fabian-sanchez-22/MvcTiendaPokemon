@@ -37,7 +37,17 @@ public function updateStock (){
 }
 
 
-
+public function descontar(){
+try {
+    $sql = $this->conexion->getConPDO()->prepare("UPDATE pokemons SET life=? WHERE id=?");
+    $sql->bindParam(1, $this->cantidad);
+    $sql->bindParam(2, $this->id);
+    $sql->execute();
+    return "Descuento Exitoso";
+} catch (\PDOException $e) {
+    return "error " . $e->getMessage();
+}
+}
 
 
 

@@ -158,37 +158,6 @@ function backInfoPokemon(name) {
 
         })
 }
-// function carritoPokemon() {
-//     let items = '';
-//     carritoCompras.forEach((element, index) => {
-//         items += `
-//             <div class="col-2">
-//                             <a onclick="eliminarPokemon('${index}')" class="btn btn-sm btn-danger">X</a>
-//                         </div>
-//             <div class="row my-3">
-//                     <img src="${element._imagen}" style="width: 35%;" alt="">
-//             </div>
-            
-//                 <div class="col-6">
-//                         <div class="row">Nombre: ${element._nombre}</div>
-//                         <div class="row">Precio: ${element._precio} x ${element._cantidad} = ${element._precio * element._cantidad}</div>
-//                         <div class="row">Cantidad: <input onclick="actCantidad(this,${index})" onkeyup="actCantidad(this,${index})" class="form-control" type="number" value="${element._cantidad}"></div>
-                        
-//                 </div>`
-//     })
-//     document.getElementById("listcarpokemon").innerHTML = items
-//     document.getElementById("cantidadItems").innerHTML = `${carritoCompras.length}+`
-//     totalCompra()
-// }
-
-// function traerCompra() {
-//     let datos = JSON.parse(localStorage.datosPokemon)
-//     datos.forEach(element => {
-//         carritoCompras.push(element)
-
-//     })
-//     carritoPokemon();
-// }
 
 function eliminarPokemon(index) {
     carritoCompras.splice(index, 1)

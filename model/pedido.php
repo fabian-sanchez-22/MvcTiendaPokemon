@@ -129,6 +129,18 @@ class Pedido
         }
         }
 
+
+        public function accederId(){
+        try {
+            $sql = $this->conexion->getConPDO()->prepare(" SELECT * FROM pedidos WHERE idPokemon=?");
+            $sql->bindParam(1, $this->idPokemon);
+            $sql->execute();
+            $result = $sql->fetchAll(\PDO::FETCH_ASSOC);
+            return $result; 
+        } catch (\PDOException $e) {
+            return $e->getMessage();
+        }
+        }
     
     
 
